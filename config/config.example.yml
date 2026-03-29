@@ -1,0 +1,29 @@
+# skynet-core example configuration
+# Copy this file to config.local.yml and update values for your local environment.
+# Never commit config.local.yml to version control.
+
+app:
+  name: skynet-core
+  env: dev   # dev | staging | prod
+  log_level: info   # debug | info | warning | error
+
+gateway:
+  host: 0.0.0.0
+  port: 8080
+  tls_enabled: false   # set to true in staging/prod
+  rate_limit:
+    requests_per_minute: 100
+
+auth:
+  jwt_algorithm: RS256
+  # Path to RSA public key used to verify tokens
+  public_key_path: /etc/skynet/keys/public.pem
+  token_expiry_seconds: 3600
+
+orchestration:
+  worker_concurrency: 4
+  retry_max_attempts: 3
+  retry_backoff_seconds: 2
+
+docker:
+  compose_file: docker/docker-compose.yml
